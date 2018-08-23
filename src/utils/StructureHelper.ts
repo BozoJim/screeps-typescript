@@ -1,12 +1,13 @@
 export class StructureHelper {
-  static constructionSites(room: Room): Array<ConstructionSite> {
+  static constructionSites(room: Room): ConstructionSite[] {
     return room.find(FIND_CONSTRUCTION_SITES);
   }
 
-  static sources(room: Room): Array<Source> {
+  static sources(room: Room): Source[] {
     return room.find(FIND_SOURCES);
   }
 
+  // find closest container/storage that has at least the amount of energy a creep needs
   static closestContainerOrStorageForPickup(creep: Creep): StructureContainer | StructureStorage | null {
     let target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
       filter: structure =>
@@ -16,6 +17,7 @@ export class StructureHelper {
     return <StructureContainer | StructureStorage>target;
   }
 
+  // find closest spawner or extension that is not full
   static closestSpawnOrExtension(creep: Creep) {
     let target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
       filter: structure =>
@@ -25,6 +27,7 @@ export class StructureHelper {
     return target;
   }
 
+  // find closest construction site
   static closestConstructionSite(creep: Creep): ConstructionSite | null {
     let target: ConstructionSite | null = creep.pos.findClosestByPath(FIND_CONSTRUCTION_SITES);
     return target;
@@ -42,12 +45,12 @@ export class StructureHelper {
 
   // find any structure or construction site with a range
   static structuresOrConstructionWithin(focus: Source | Structure, search: StructureConstant, range: number): number {
-    let structures: Array<Structure> = focus.pos.findInRange(FIND_STRUCTURES, range, {
+    let structures: Structure[] = focus.pos.findInRange(FIND_STRUCTURES, range, {
       filter: (structure: Structure) => {
         return structure.structureType == search
       }
     });
-    let constructionSites: Array<ConstructionSite> = focus.pos.findInRange(FIND_CONSTRUCTION_SITES, range, {
+    let constructionSites: ConstructionSite[] = focus.pos.findInRange(FIND_CONSTRUCTION_SITES, range, {
       filter: (construction: ConstructionSite) => {
         return construction.structureType
       }

@@ -7,6 +7,7 @@ export class SpawnCreeps {
     this.spawn(room, roles);
   }
 
+  // tiered approach to build each creep role
   static buildRoles(room: Room) {
     let construcion_count = StructureHelper.constructionSites(room).length;
     let source_count = StructureHelper.sources(room).length;
@@ -19,24 +20,7 @@ export class SpawnCreeps {
           3: { parts: [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE] },
           4: {
             parts: [
-              WORK,
-              WORK,
-              WORK,
-              WORK,
-              WORK,
-              WORK,
-              CARRY,
-              CARRY,
-              CARRY,
-              CARRY,
-              CARRY,
-              CARRY,
-              MOVE,
-              MOVE,
-              MOVE,
-              MOVE,
-              MOVE,
-              MOVE
+              WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE
             ]
           }
         }
@@ -47,10 +31,14 @@ export class SpawnCreeps {
           1: { parts: [WORK, WORK, CARRY, MOVE] },
           2: { parts: [CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE] },
           3: {
-            parts: [CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE]
+            parts: [
+              CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE
+            ]
           },
           4: {
-            parts: [CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE]
+            parts: [
+              CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE
+            ]
           }
         }
       },

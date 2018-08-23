@@ -31,6 +31,8 @@ export class CreepManager {
   }
 
   static spawn() {
+    // Only spawn every 50 ticks. This ensures a separation so that all creeps of an individual role
+    // should be at least 50 ticks apart.
     if (Game.time % 50 == 0) {
       for (let name in Game.rooms) {
         SpawnCreeps.run(Game.rooms[name]);

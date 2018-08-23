@@ -14,6 +14,7 @@ export class Hauler {
       creep.memory.working = false;
     }
 
+    // Collect energy until you fill up, then deposit it in the nearest spawn/extension.
     if (creep.memory.working) {
       let closestTarget = StructureHelper.closestSpawnOrExtension(creep)!;
       CreepHelper.transferTo(creep, closestTarget, RESOURCE_ENERGY);

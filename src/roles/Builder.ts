@@ -16,6 +16,7 @@ export class Builder {
       creep.memory.working = false;
     }
 
+    // Collect energy until you fill up, then go build.
     if (creep.memory.working) {
       if (constructionSite) {
         CreepHelper.buildTo(creep, constructionSite);
@@ -28,6 +29,7 @@ export class Builder {
       }
     }
 
+    // If you are done, just suicide. A creep that needs energy will come pick up any dropped energy
     if (!constructionSite) {
       creep.suicide();
     }

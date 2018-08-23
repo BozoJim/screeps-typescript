@@ -15,6 +15,8 @@ export class Upgrader {
       creep.memory.working = false;
     }
 
+    // We try to keep these creeps working. Pick up from a container or dropped resources, worst
+    // case harvest.
     if (creep.memory.working) {
       CreepHelper.upgradeTo(creep, controller);
     } else {
