@@ -77,6 +77,7 @@ export class SpawnCreeps {
   }
 
   static spawn(room: Room, roles: any) {
+    let tier = this.countExtensions(room);
     let spawns = room.find(FIND_MY_SPAWNS);
     for (let spawn of spawns) {
       for (let role in roles) {
@@ -85,7 +86,7 @@ export class SpawnCreeps {
         console.log(role + ": " + creeps_of_role.length);
         if (creeps_of_role.length < roles[role]["count"]) {
           if (
-            spawn.spawnCreep(roles[role]["tier"][1]["parts"], newName, {
+            spawn.spawnCreep(roles[role]["tier"][tier]["parts"], newName, {
               memory: { role: role, room: room.name, working: false }
             })
           ) {
@@ -96,15 +97,21 @@ export class SpawnCreeps {
     }
   }
 
-  // static creepName(role: any) {
-  //   for (let creepCounter = 0; ; creepCounter++) {
-  //     console.log(role + "_" + creepCounter);
-  //     for (const name in Memory.creeps) {
-  //       if (!(role + "_" + creepCounter in Game.creeps)) {
-  //         console.log(role + "_" + creepCounter);
-  //         return "role" + "_" + creepCounter;
-  //       }
-  //     }
-  //   }
-  // }
+  // count the number of extensions in the room. Select a tier from the hash above.
+  static countExtensions(room: Room) {
+    let extensions = StructureHelper.extensionsInRoom(room);
+    if (extensions == null) {
+      return 1
+    }
+    switch (true) {
+      case extensions != null && extensions.length < 5:
+        return 1
+      case extensions.length < 10:
+        return 2
+      case extensions.length < 15:
+        return 3
+      default:
+        return 4;
+    }
+  }
 }
