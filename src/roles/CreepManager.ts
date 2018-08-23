@@ -26,14 +26,12 @@ export class CreepManager {
         case "upgrader":
           Upgrader.run(creep);
           break;
-        default:
-          break;
       }
     }
   }
 
   static spawn() {
-    if (Game.time % 10 == 0) {
+    if (Game.time % 50 == 0) {
       for (let name in Game.rooms) {
         SpawnCreeps.run(Game.rooms[name]);
       }
