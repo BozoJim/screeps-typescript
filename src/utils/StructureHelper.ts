@@ -7,6 +7,15 @@ export class StructureHelper {
     return room.find(FIND_SOURCES);
   }
 
+  static closestContainerOrStorageForPickup(creep: Creep): StructureContainer | StructureStorage | null {
+    let target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
+      filter: structure =>
+        (structure.structureType === STRUCTURE_CONTAINER || structure.structureType === STRUCTURE_STORAGE) &&
+        structure.store[RESOURCE_ENERGY] > (creep.carryCapacity - creep.carry.energy)
+    });
+    return <StructureContainer | StructureStorage>target;
+  }
+
   static closestSpawnOrExtension(creep: Creep) {
     let target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
       filter: structure =>

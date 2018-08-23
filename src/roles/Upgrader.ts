@@ -6,6 +6,7 @@ export class Upgrader {
     let source: Source = creep.pos.findClosestByPath(FIND_SOURCES)!;
     let controller: StructureController = creep.room.controller!;
     let resource: Resource | null = creep.pos.findClosestByPath(FIND_DROPPED_RESOURCES);
+    let container = StructureHelper.closestContainerOrStorageForPickup(creep);
 
     if (creep.carry.energy === creep.carryCapacity) {
       creep.memory.working = true;
@@ -17,7 +18,9 @@ export class Upgrader {
     if (creep.memory.working) {
       CreepHelper.upgradeTo(creep, controller);
     } else {
-      if (resource) {
+      if (container) {
+        CreepHelper.withdrawTo(creep, container, RESOURCE_ENERGY);
+      } else if (resource) {
         CreepHelper.pickupTo(creep, resource);
       } else {
         CreepHelper.harvestTo(creep, source);
