@@ -43,6 +43,16 @@ export class StructureHelper {
     return <StructureExtension[] | null>extensions;
   }
 
+  // find all towers in current room
+  static towersInRoom(room: Room): StructureTower[] {
+    let towers = room.find(FIND_MY_STRUCTURES, {
+      filter: (structure: Structure) => {
+        return structure.structureType == STRUCTURE_TOWER
+      }
+    })
+    return <StructureTower[]>towers;
+  }
+
   // find any structure or construction site with a range
   static structuresOrConstructionWithin(focus: Source | Structure, search: StructureConstant, range: number): number {
     let structures: Structure[] = focus.pos.findInRange(FIND_STRUCTURES, range, {

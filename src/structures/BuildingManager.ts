@@ -1,5 +1,6 @@
 import { BuildRoads } from "./BuildRoads";
 import { BuildContainers } from "./BuildContainers";
+import { Tower } from "./Tower";
 import { Visuals } from "./Visuals";
 
 export class BuildingManager {
@@ -8,6 +9,7 @@ export class BuildingManager {
     if (Game.time % 100 == 0) {
       BuildRoads.run(room);
       BuildContainers.run(room);
+      Tower.run(room);
     }
     Visuals.run(room);
   }
